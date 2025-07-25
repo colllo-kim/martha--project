@@ -35,16 +35,17 @@ function Login() {
     e.preventDefault()
 
     if (userData.email === adminEmail && userData.password === adminPassword) {
-      const info = {"id":'123', "token":'123'}
-      setCurrentUser(info)
-      navigate('/admin')
+      const info = { id: 'admin-123', token: 'admin-token' };
+      setCurrentUser(info);
+      navigate('/dashboard/admin'); // ✅ Admin panel route
     } else if (userData.email === email && userData.password === password) {
-      const info = {id:'123', token:'123'}
-      setCurrentUser(info)
-      navigate('/') // change as needed
+      const info = { id: 'user-123', token: 'user-token' };
+      setCurrentUser(info);
+      navigate('/dashboard/home'); // ✅ Regular user route
     } else {
-      setError('Invalid credentials')
+      setError('Invalid credentials');
     }
+    
   }
 
   return (
