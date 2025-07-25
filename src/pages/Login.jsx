@@ -37,11 +37,11 @@ function Login() {
     if (userData.email === adminEmail && userData.password === adminPassword) {
       const info = { id: 'admin-123', token: 'admin-token' };
       setCurrentUser(info);
-      navigate('/dashboard/admin'); // ✅ Admin panel route
+      navigate('/admin'); // ✅ Admin panel route
     } else if (userData.email === email && userData.password === password) {
       const info = { id: 'user-123', token: 'user-token' };
       setCurrentUser(info);
-      navigate('/dashboard/home'); // ✅ Regular user route
+      navigate('/home'); // ✅ Regular user route
     } else {
       setError('Invalid credentials');
     }

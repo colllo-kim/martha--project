@@ -34,13 +34,12 @@ const router = createBrowserRouter([
     element: <Register />,
   },
 
-  // Protected routes under layout (can be adjusted later to require auth)
+  // App routes wrapped with layout (flat structure)
   {
-    path: '/dashboard',
+    path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Home /> },
       { path: 'home', element: <Home /> },
       { path: 'services', element: <Services /> },
       { path: 'about', element: <AboutUs /> },
