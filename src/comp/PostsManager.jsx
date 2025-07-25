@@ -13,7 +13,7 @@ function PostsManager({ posts, setPosts, newPost, setNewPost, editingPost, setEd
         {/* New / Edit Form */}
        {/* New / Edit Form */}
 <div className="rounded-lg bg-white p-6 shadow dark:bg-slate-800">
-  <h2 className="mb-4 text-xl font-bold">{editingPost ? "Edit Post" : "Create New Post"}</h2>
+  <h2 className="mb-4 text-xl font-bold">{editingPost ? "Edit blog" : "Create New blog"}</h2>
 
   {/* Title */}
   <input

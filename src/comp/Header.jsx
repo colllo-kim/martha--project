@@ -38,7 +38,7 @@ function Header() {
     <nav className="bg-green-900 max-w-[75rem] w-full m-auto h-[5rem] px-4 flex items-center justify-between sticky top-0 z-10 text-white">
       {/* Logo */}
       <Link to='/' className='flex items-center gap-2'>
-        <img className='w-12 h-10 object-cover' src={logo} alt="Logo" />
+        <img className='w-5 h-5 object-contain' src={logo} alt="Logo" />
         <span className="font-semibold text-lg hidden sm:inline">Kamendi</span>
       </Link>
 
@@ -67,12 +67,12 @@ function Header() {
           {theme === 'dark' ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-blue-600" />}
         </button>
 
-        {!currentUser.id && 
+        {currentUser.id && 
           <Link
-            to="/register"
+            to="/admin"
             className="bg-green-300 text-green-900 px-4 py-2 rounded-full font-medium text-sm hover:bg-green-400"
           >
-            Create Account
+            Panel
           </Link>
          }
             {currentUser.token && 

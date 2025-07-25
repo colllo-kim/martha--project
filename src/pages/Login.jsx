@@ -41,7 +41,7 @@ function Login() {
     } else if (userData.email === email && userData.password === password) {
       const info = {id:'123', token:'123'}
       setCurrentUser(info)
-      navigate('/home') // change as needed
+      navigate('/') // change as needed
     } else {
       setError('Invalid credentials')
     }
@@ -129,7 +129,7 @@ function Login() {
                   Don’t have an account?{' '}
                   <span
                     onClick={() => navigate('/register')}
-                    className='font-bold text-black cursor-pointer'
+                    className='font-bold  cursor-pointer'
                   >
                     Register
                   </span>

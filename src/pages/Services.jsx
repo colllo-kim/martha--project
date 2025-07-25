@@ -12,7 +12,7 @@ import soil from '@/assets/soil.png'
 import water from '@/assets/water.png'
 import educate from '@/assets/educating.png'
 import soil2 from '@/assets/soil-2.png'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AppContext } from '@/context/AppContext';
 function Services() {
@@ -197,12 +197,12 @@ useEffect(() =>{
         <p className="text-lg text-gray-600 dark:text-gray-400">
           Want to support any of these programs or partner with us?
         </p>
-        <a
-          href="/contact"
+        <Link
+          to="/contact"
           className="mt-6 inline-block rounded-full bg-green-700 px-8 py-4 text-white hover:bg-green-600"
         >
           Reach Out To Us
-        </a>
+        </Link>
       </div>
     </div>
   </section>

@@ -3,6 +3,9 @@ import { FaUser, FaCalendarAlt, FaTags } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import logo from '@/assets/logo.png'
 import { AppContext } from "@/context/AppContext";
+import school from '@/assets/school.png'
+import water from '@/assets/water.png'
+import communtytree from '@/assets/com-tree.png'
 function Blog() {
 
   const {currentUser} = useContext(AppContext);
@@ -13,20 +16,20 @@ function Blog() {
     {
       id: 1,
       title: "How Tree Planting is Reviving the Cherangany Ecosystem",
-      author: "Admin",
+      author: "Martha",
       date: "July 5, 2025",
       tags: ["Environment", "Forestry"],
-      image: logo,
+      image: communtytree,
       excerpt:
         "Explore how our tree planting initiatives have improved biodiversity, reduced erosion, and brought hope to communities.",
     },
     {
       id: 2,
       title: "Protecting Springs: Lifelines for Kamendi",
-      author: "Jane W.",
+      author: "Martha",
       date: "June 22, 2025",
       tags: ["Water", "Conservation"],
-      image: logo,
+      image: water,
       excerpt:
         "A closer look into the science and community collaboration behind spring protection and water access in our region.",
     },
@@ -36,40 +39,11 @@ function Blog() {
       author: "Environmental Club",
       date: "June 10, 2025",
       tags: ["Education", "Climate Action"],
-      image: logo,
+      image: school,
       excerpt:
         "From tree nurseries to waste management clubs, schools are stepping up for a greener tomorrow.",
     },
-    {
-      id: 4,
-      title: "What Schools Can Do to Fight Climate Change",
-      author: "Environmental Club",
-      date: "June 10, 2025",
-      tags: ["Education", "Climate Action"],
-      image: logo,
-      excerpt:
-        "From tree nurseries to waste management clubs, schools are stepping up for a greener tomorrow.",
-    },
-    {
-      id: 5,
-      title: "What Schools Can Do to Fight Climate Change",
-      author: "Environmental Club",
-      date: "June 10, 2025",
-      tags: ["Education", "Climate Action"],
-      image: logo,
-      excerpt:
-        "From tree nurseries to waste management clubs, schools are stepping up for a greener tomorrow.",
-    },
-    {
-      id: 6,
-      title: "What Schools Can Do to Fight Climate Change",
-      author: "Environmental Club",
-      date: "June 10, 2025",
-      tags: ["Education", "Climate Action"],
-      image: logo,
-      excerpt:
-        "From tree nurseries to waste management clubs, schools are stepping up for a greener tomorrow.",
-    },
+    
   ];
 
   useEffect(() => {
