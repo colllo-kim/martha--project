@@ -2,12 +2,12 @@ import { AppContext } from '@/context/AppContext';
 import React, { useContext, useEffect } from 'react'
 import { FaRegLightbulb, FaUsers, FaHandsHelping } from "react-icons/fa";
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
 function AboutUs() {
   const {currentUser} = useContext(AppContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const token = currentUser?.token;
 useEffect(() =>{
  if(!token){
