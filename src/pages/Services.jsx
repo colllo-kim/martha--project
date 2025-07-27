@@ -1,0 +1,212 @@
+import React, { useEffect } from 'react'
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { FaLeaf, FaTint, FaMountain, FaHandsHelping, FaRecycle, FaGlobeAfrica } from "react-icons/fa";
+import logo from '@/assets/logo.png'
+import community from '@/assets/community.png'
+import general  from '@/assets/general.png'
+import man from '@/assets/man.png'
+import mantree from '@/assets/man-tree.png'
+import school from '@/assets/school.png'
+import soil from '@/assets/soil.png'
+import water from '@/assets/water.png'
+import educate from '@/assets/educating.png'
+import soil2 from '@/assets/soil-2.png'
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AppContext } from '@/context/AppContext';
+function Services() {
+  const {currentUser} = useContext(AppContext);
+  const token = currentUser?.token;
+  const navigate = useNavigate();
+useEffect(() =>{
+ if(!token){
+  navigate('/login')
+ }
+},[currentUser])
+
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then(() => toast.success("Message sent successfully!"))
+      .catch(() => toast.error("Failed to send message."));
+  };
+   
+  const services = [
+    {
+      icon: <FaLeaf className="text-green-600 text-4xl" />,
+      title: "Tree Growing & Agroforestry",
+      description:
+        "We engage local schools, farmers, and youth groups in tree planting drives to combat deforestation. Our agroforestry programs empower farmers to integrate trees with crops, increasing resilience to climate change while improving food security.",
+      objectives: [
+        "Promote indigenous and fruit tree planting",
+        "Restore degraded landscapes",
+        "Enhance livelihoods through agroforestry"
+      ],
+      image: man,
+    },
+    {
+      icon: <FaTint className="text-blue-600 text-4xl" />,
+      title: "Water Conservation & Spring Protection",
+      description:
+        "We identify and protect key water sources such as springs through fencing, tank installation, and gravity flow systems. This ensures long-term access to clean and potable water for communities living in the Cherangany ecosystem.",
+      objectives: [
+        "Construct spring protection headwalls",
+        "Install storage and distribution tanks",
+        "Improve access to clean water"
+      ],
+      image:water,
+    },
+    {
+      icon: <FaMountain className="text-yellow-600 text-4xl" />,
+      title: "Soil Conservation & Sustainable Agriculture",
+      description:
+        "Through training and demonstration farms, we teach farmers best practices for soil retention, erosion control, and sustainable farming. This preserves soil fertility, improves yields, and builds resilience.",
+      objectives: [
+        "Train on terracing, cover cropping & mulching",
+        "Reduce erosion in high-risk zones",
+        "Promote climate-smart agriculture"
+      ],
+      image: soil,
+    },
+    {
+      icon: <FaRecycle className="text-purple-600 text-4xl" />,
+      title: "Waste Management & Environmental Clean-Ups",
+      description:
+        "We organize community clean-ups and awareness drives to manage solid waste, reduce pollution, and promote environmental hygiene in public spaces, schools, and markets.",
+      objectives: [
+        "Conduct monthly clean-up campaigns",
+        "Train on proper waste disposal",
+        "Promote recycling and reuse culture"
+      ],
+      image: general,
+    },
+    {
+      icon: <FaGlobeAfrica className="text-red-600 text-4xl" />,
+      title: "Climate Change Education",
+      description:
+        "We create awareness on climate change, biodiversity loss, and the importance of sustainable practices among school children, communities, and policy stakeholders.",
+      objectives: [
+        "Partner with schools for climate clubs",
+        "Develop conservation learning materials",
+        "Host community climate forums"
+      ],
+      image: educate,
+    },
+    {
+      icon: <FaHandsHelping className="text-pink-600 text-4xl" />,
+      title: "Community Mobilization & Capacity Building",
+      description:
+        "We strengthen community institutions and local leadership to take charge of environmental protection efforts by offering training, support, and technical knowledge.",
+      objectives: [
+        "Train community-based conservation groups",
+        "Mentor local leaders and youth",
+        "Facilitate stakeholder collaboration"
+      ],
+      image: community,
+    },
+    {
+      icon: <FaHandsHelping className="text-pink-600 text-4xl" />,
+      title: " 🌿 School-Based Agroforestry & High-Value Crop Model",
+      description:
+        "  We empower schools to create sustainable farms that support nutrition, education, and income. This model integrates high-value fruit trees and crops in the school ecosystem..",
+      objectives: [
+        "Improve school nutrition and food security",
+        "Generate school income for welfare and operations",
+        "Teach students practical environmental and agriculture skills",
+        "Build climate resilience and sustainability awareness"
+      ],
+      image: school,
+    }
+  ];
+  return (
+    <section className="bg-white dark:bg-slate-900 px-4 py-16 w-full">
+    <div className="mx-auto max-w-6xl">
+      <h2
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12 text-center text-4xl font-extrabold text-green-800 dark:text-green-300"
+      >
+        Our Core Programs & Services
+      </h2>
+
+      <div className="space-y-24">
+        {services.map((s, i) => (
+          <div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            viewport={{ once: true }}
+            className={`flex flex-col-reverse items-center gap-10 lg:flex-row ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+          >
+            <div className="w-full max-w-xl text-center lg:text-left">
+              <div className="mb-3">{s.icon}</div>
+              <h3 className="mb-3 text-2xl font-semibold text-blue-800 dark:text-blue-300">{s.title}</h3>
+              <p className="mb-4 text-gray-700 dark:text-gray-300">{s.description}</p>
+              <ul className="list-disc space-y-2 pl-6 text-left text-gray-600 dark:text-gray-400">
+                {s.objectives.map((o, j) => (
+                  <li key={j}>{o}</li>
+                ))}
+              </ul>
+            </div>
+            <img
+              src={s.image}
+              alt={s.title}
+              className="w-full max-w-xl rounded-3xl object-cover shadow-xl h-72 lg:h-96"
+            />
+          </div>
+        ))}
+      </div>
+         {/* New Section: School Agroforestry Model */}
+         <div className="rounded-xl bg-gray-50 dark:bg-slate-800 p-6 shadow-lg mt-[20px]">
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-200">Core Components:</h3>
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  <strong>Site Planning:</strong> land zoning, soil testing, and layout for trees, crops, nurseries, composting, and water systems.
+                </li>
+                <li>
+                  <strong>Crop Design:</strong> fruit trees like mango, avocado, passionfruit; intercropped with vegetables; based on agroforestry principles.
+                </li>
+                <li>
+                  <strong>Capacity Building:</strong> teacher and student training via school clubs (e.g., 4K Club) and extension officers.
+                </li>
+                <li>
+                  <strong>Maintenance:</strong> student participation, crop calendar, organic techniques.
+                </li>
+                <li>
+                  <strong>Market Linkages:</strong> connect with local buyers and reinvest income into bursaries and school needs.
+                </li>
+              </ul>
+
+              <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-200">Partners & Stakeholders:</h3>
+              <p>
+                Ministry of Education and Agriculture, local governments, NGOs, parents, and students – working together for shared impact and sustainability.
+              </p>
+            </div>
+          </div>
+      <div className="mt-20 text-center">
+        <p className="text-lg text-gray-600 dark:text-gray-400">
+          Want to support any of these programs or partner with us?
+        </p>
+        <Link
+          to="/contact"
+          className="mt-6 inline-block rounded-full bg-green-700 px-8 py-4 text-white hover:bg-green-600"
+        >
+          Reach Out To Us
+        </Link>
+      </div>
+    </div>
+  </section>
+  )
+}
+
+export default Services
