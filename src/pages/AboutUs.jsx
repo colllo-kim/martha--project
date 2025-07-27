@@ -1,7 +1,10 @@
 import { AppContext } from '@/context/AppContext';
 import React, { useContext, useEffect } from 'react'
 import { FaRegLightbulb, FaUsers, FaHandsHelping } from "react-icons/fa";
+
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 function AboutUs() {
   const {currentUser} = useContext(AppContext);
   const navigate = useNavigate();
@@ -130,7 +133,9 @@ useEffect(() =>{
       </div>
           
       <section className='text-center space-y-1'>
-          <h2 className="mb-4 text-2xl font-semibold text-blue-800 dark:text-blue-300 mt-10">
+
+          
+          <h2 className="mb-4 text-2xl font-semibold text-blue-800 dark:text-blue-300">
             🤝 Our Stakeholders
           </h2>
           <ul className="list-disc list-inside space-y-2">
@@ -151,12 +156,15 @@ useEffect(() =>{
         <p className="mx-auto max-w-2xl text-gray-600 dark:text-gray-400">
           We are a diverse team of passionate environmentalists, community leaders, educators, and youth volunteers working hand-in-hand to protect and restore the environment. Join us as a volunteer, partner, or ambassador.
         </p>
+
         <Link
           to={"/contact"}
           className="mt-6 inline-block rounded-full bg-green-700 px-8 py-4 text-white hover:bg-green-600"
         >
           Join Our Mission
         </Link>
+      
+
       </div>
     </div>
   </section>

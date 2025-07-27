@@ -2,6 +2,7 @@
 import React, { useContext, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import logo from '@/assets/logo.png';
+
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import "react-multi-carousel/lib/styles.css";
@@ -15,6 +16,7 @@ import soil from '@/assets/soil.png'
 import water from '@/assets/water.png'
 import educate from '@/assets/educating.png'
 
+
 //recent images
 import  gnhimg from '@/assets/gnhimg.jpg'
 import img2 from '@/assets/img2.jpg'
@@ -24,6 +26,7 @@ import schimg from '@/assets/schimg.jpg'
 import schphoto from '@/assets/schphoto.jpg'
 import wmn from '@/assets/wmn.jpg'
 
+import soil2 from '@/assets/soil-2.png'
 import communtytree from '@/assets/com-tree.png'
 import { AppContext } from '@/context/AppContext';
 function Home() {
@@ -56,7 +59,7 @@ function Home() {
     { src: schphoto, alt: " Benon Students" },
     { src: wmn, alt: "Local efforts" },
   ];
-
+ 
   const stats = [
     { value: 35000, label: "Trees Planted" },
     { value: 12, label: "Springs Protected" },

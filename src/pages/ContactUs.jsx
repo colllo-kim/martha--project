@@ -49,7 +49,11 @@ useEffect(() =>{
               <FaEnvelope className="mt-1 text-green-600 text-xl" />
               <div>
                 <p className="font-medium">Email</p>
+
                 <p>Kamendiwatersources&environmentgroup@gmail.com</p>
+
+              
+
               </div>
             </div>
 

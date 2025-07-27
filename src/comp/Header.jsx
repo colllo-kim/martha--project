@@ -23,6 +23,7 @@ function Header() {
   }, [theme]);
 
   const navItems = [
+
     { label: 'Home', path: '/home' },
     { label: 'Services', path: '/services' },
     { label: 'About Us', path: '/about' },
@@ -35,6 +36,7 @@ function Header() {
   return (
     <>
  
+
     <nav className="bg-green-900 max-w-[75rem] w-full m-auto h-[5rem] px-4 py-2 flex items-center justify-between sticky top-0 z-10 text-white">
       {/* Logo */}
       <Link to='/home' className='flex items-center gap-2'>
@@ -70,7 +72,9 @@ function Header() {
         {currentUser.id && 
           <Link
             to="/admin"
-            className="bg-green-300 text-green-900 px-5 py-1 rounded-full font-medium text-sm hover:bg-green-400"
+
+            className="bg-green-300 text-green-900 px-4 py-2 rounded-full font-medium text-sm hover:bg-green-400"
+
           >
             Panel
           </Link>
@@ -80,7 +84,8 @@ function Header() {
             navigate('/login')
           }  }
             
-            className="bg-green-300 text-green-900 px-4 py-1 rounded-full font-medium text-sm hover:bg-green-400"
+            className="bg-green-300 text-green-900 px-4 py-2 rounded-full font-medium text-sm hover:bg-green-400"
+
           >
             Logout
           </Link>
