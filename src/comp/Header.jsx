@@ -4,14 +4,17 @@ import logo from '@/assets/logo.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import { AppContext } from '@/context/AppContext';
-
+import {UserButton} from '@clerk/clerk-react'
 
 function Header() {
   const [theme, setThemeState] = useState(getTheme());
   const [isNavShowing, setIsNavShowing] = useState(false);
-  const { currentUser, setCurrentUser   } = useContext(AppContext);
+  const { user  } = useContext(AppContext);
   const location = useLocation();
   const navigate = useNavigate()
+
+  const ADMIN_EMAIL = '  kamendiwatersourceenvironment@gmail.com'; // replace with your admin email
+  
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
@@ -24,7 +27,7 @@ function Header() {
 
   const navItems = [
 
-    { label: 'Home', path: '/home' },
+    { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
     { label: 'About Us', path: '/about' },
     { label: 'Blog', path: '/blog' },
@@ -69,27 +72,19 @@ function Header() {
           {theme === 'dark' ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-blue-600" />}
         </button>
 
-        {currentUser.id && 
+           { user ? <UserButton /> : null }
+
+         {user?.emailAddresses?.[0]?.emailAddress === ADMIN_EMAIL && (
           <Link
             to="/admin"
 
-            className="bg-green-300 text-green-900 px-4 py-2 rounded-full font-medium text-sm hover:bg-green-400"
+            className="bg-green-300 text-green-900 px-4 py-1 rounded-full font-medium text-sm hover:bg-green-400"
 
           >
             Panel
           </Link>
-         }
-            {currentUser.token && 
-          <Link onClick={() =>{ setCurrentUser(null)
-            navigate('/login')
-          }  }
-            
-            className="bg-green-300 text-green-900 px-4 py-2 rounded-full font-medium text-sm hover:bg-green-400"
-
-          >
-            Logout
-          </Link>
-         }
+       )}
+         
          
 
         <button

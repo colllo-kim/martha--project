@@ -1,24 +1,12 @@
-import { AppContext } from '@/context/AppContext';
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { FaRegLightbulb, FaUsers, FaHandsHelping } from "react-icons/fa";
-
-import { Link, } from 'react-router-dom';
-
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function AboutUs() {
-  const {currentUser} = useContext(AppContext);
-  const navigate = useNavigate()
-  const token = currentUser?.token;
-useEffect(() =>{
- if(!token){
-  navigate('/login')
- }
-},[currentUser])
   const pillars = [
     {
       icon: <FaRegLightbulb className="text-yellow-500 text-3xl" />,
       title: "Our Vision",
-      text: "To be a model environmental organization contributing to a resilient and sustainable community."
+      text: "Model environmental organization contributing to a resilient and sustainable community."
     },
     {
       icon: <FaHandsHelping className="text-green-600 text-3xl" />,
@@ -36,7 +24,7 @@ useEffect(() =>{
     "Environmental Stewardship",
     "Community Empowerment",
     "Sustainability",
-    "Transparency",
+    "Accountability",
     "Partnerships",
     "Youth Engagement"
   ];
@@ -85,7 +73,7 @@ useEffect(() =>{
         
       <section className="rounded-xl bg-gray-50 dark:bg-slate-800 p-6 shadow mt-[20px]">
           <h2 className="mb-4 text-2xl font-bold text-green-700 dark:text-green-300">
-            🌿 School-Based Agroforestry & Climate Resilience
+            🌿 School and village Based Agroforestry & Climate Resilience
           </h2>
           <p className="mb-4">
             We collaborate with schools to create sustainable farms that integrate high-value fruit trees, vegetables, and herbs, promoting nutrition, skills development, and income generation.
@@ -104,7 +92,7 @@ useEffect(() =>{
           </h2>
           <ul className="list-disc list-inside space-y-1">
             <li>Spring protection systems to provide clean water access to remote communities</li>
-            <li>Agroforestry and tree planting initiatives in schools and community farms</li>
+            <li>Agroforestry and tree growing initiatives in schools and community farms</li>
             <li>Soil protection through sustainable farming methods</li>
             <li>Environmental education and capacity building with students and community members</li>
           </ul>
@@ -132,19 +120,21 @@ useEffect(() =>{
         </ul>
       </div>
           
-      <section className='text-center space-y-1'>
+      <section className='text-center space-y-1 mt-6'>
 
           
           <h2 className="mb-4 text-2xl font-semibold text-blue-800 dark:text-blue-300">
             🤝 Our Stakeholders
           </h2>
-          <ul className="list-disc list-inside space-y-2">
+          <ul className="list-disc list-inside space-y-2 ">
             <li><strong>Students:</strong> Change agents and custodians of the environment</li>
+              <li><strong>Environment & National Goverment Administration:</strong> Technical and policy support</li>
             <li><strong>Schools:</strong> Grounds for practical agroforestry innovation</li>
             <li><strong>Parents & Community:</strong> Support, labor, and local knowledge</li>
             <li><strong>Ministry of Education & Agriculture:</strong> Technical and policy support</li>
             <li><strong>NGOs/CSOs:</strong> Funding, capacity building, and scaling efforts</li>
             <li><strong>County Government:</strong> Seedlings, market access, and infrastructure</li>
+              <li><strong>Forestry:</strong> Support and collaboration</li>
           </ul>
         </section>
 
