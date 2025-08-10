@@ -137,18 +137,18 @@ const clearForm = () => {
   };
 
   // Delete post
-  const deletePost = async (id) => {
+  const deletePost = async (blogId) => {
     try {
       const token = await getToken();
       if (!token) throw new Error("No token");
 
-      await axios.delete(`${API_URL}/${id}`, {
+      await axios.delete(`${API_URL}blogs/${blogId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      setPosts(posts.filter((p) => p.id !== id));
+      setPosts(posts.filter((p) => p.id !== blogId));
     } catch (err) {
       console.error(err);
       alert("Error deleting post");
