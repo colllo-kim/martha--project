@@ -25,6 +25,7 @@ function Footer() {
             />
             <p>Resilience, growing greener together.</p>
           </div>
+          {/**
           <div className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold mb-2 text-black">Socials</h4>
             <div className="flex gap-4 text-xl">
@@ -48,6 +49,7 @@ function Footer() {
               </a>
             </div>
           </div>
+           */}
         </div>
 
         {/* Quick links */}

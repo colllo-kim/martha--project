@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   FaMapMarkerAlt,
   FaEnvelope,
@@ -18,6 +18,32 @@ import {
 } from 'react-icons/fa';
 
 function ContactUs() {
+
+   const formRef = useRef(null);
+
+     const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xzzvyzro", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        alert("✅ Message sent! Thank you for reaching out.");
+        formRef.current.reset(); // Clear form only after success
+      } else {
+        alert("⚠️ Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("❌ Failed to send message. Please check your connection.");
+    }
+  };
   return (
     <section className="bg-white dark:bg-slate-900 px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -80,7 +106,7 @@ function ContactUs() {
               </div>
             </div>
 
-            {/* Social Links */}
+            {/* Social Links
             <div className="mt-8 flex gap-6 text-xl">
               <a href="#" className="text-blue-700 hover:text-blue-900"><FaFacebook /></a>
               <a href="#" className="text-sky-500 hover:text-sky-700"><FaTwitter /></a>
@@ -89,7 +115,7 @@ function ContactUs() {
               <a href="#" className="text-blue-500 hover:text-blue-700"><FaLinkedin /></a>
               <a href="#" className="text-green-500 hover:text-green-700"><FaWhatsapp /></a>
             </div>
-
+              */}
             {/* Map */}
             <div className="mt-8">
               <iframe
@@ -106,14 +132,11 @@ function ContactUs() {
           </div>
 
           {/* Contact Form */}
+             {/* Contact Form */}
           <form
-            action="https://formspree.io/f/xzzvyzro" // Replace with real ID
-            method="POST"
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="rounded-2xl border border-green-100 bg-white p-6 sm:p-8 shadow-lg dark:border-slate-700 dark:bg-slate-800"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("✅ Message sent! Thank you for reaching out.");
-            }}
           >
             <h3 className="mb-6 text-xl sm:text-2xl font-semibold text-green-800 dark:text-green-300">
               ✍️ Send Us a Message
@@ -124,6 +147,7 @@ function ContactUs() {
               <input
                 required
                 type="text"
+                name="name"
                 placeholder="Your Name"
                 className="w-full rounded border border-gray-300 p-3 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
               />
@@ -134,6 +158,7 @@ function ContactUs() {
               <input
                 required
                 type="email"
+                name="email"
                 placeholder="Email Address"
                 className="w-full rounded border border-gray-300 p-3 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
               />
@@ -143,6 +168,7 @@ function ContactUs() {
               <FaPhone className="text-green-600" />
               <input
                 type="text"
+                name="phone"
                 placeholder="Phone Number (Optional)"
                 className="w-full rounded border border-gray-300 p-3 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
               />
@@ -152,6 +178,7 @@ function ContactUs() {
               <FaTag className="text-green-600" />
               <input
                 type="text"
+                name="subject"
                 placeholder="Subject"
                 className="w-full rounded border border-gray-300 p-3 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
               />
@@ -162,6 +189,7 @@ function ContactUs() {
               <textarea
                 required
                 rows="5"
+                name="message"
                 placeholder="Write your message here..."
                 className="w-full rounded border border-gray-300 p-3 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
               ></textarea>
