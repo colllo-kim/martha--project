@@ -32,6 +32,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/blogs', blogRouter);
 // Start server
+app.get('/', (req, res) => {
+  res.send('OK');
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`✅ Server is running on port ${port}`);
