@@ -4,7 +4,7 @@ import 'dotenv/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { clerkMiddleware, requireAuth } from '@clerk/express';
-
+import fetch from "node-fetch";
 // routes
 import blogRouter from './routes/blogRoutes.js';
 
@@ -35,6 +35,20 @@ app.use('/api/blogs', blogRouter);
 app.get('/', (req, res) => {
   res.send('OK');
 });
+  
+// ping.js or inside server.js
+import fetch from "node-fetch";
+
+const url = process.env.PING_URL || "https://your-render-app.onrender.com";
+
+setInterval(async () => {
+  try {
+    const res = await fetch(url);
+    console.log(`Pinged ${url} — Status: ${res.status}`);
+  } catch (err) {
+    console.error(`Ping failed: ${err.message}`);
+  }
+}, 14 * 60 * 1000); // every 14 minutes
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
