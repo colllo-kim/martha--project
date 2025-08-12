@@ -13,7 +13,7 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate()
 
-  const ADMIN_EMAIL = '  kamendiwatersourceenvironment@gmail.com'; // replace with your admin email
+  const ADMIN_EMAIL = 'kamendiwatersourceenvironment@gmail.com'; // replace with your admin email
   
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
