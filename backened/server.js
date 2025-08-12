@@ -36,8 +36,7 @@ app.get('/', (req, res) => {
   res.send('OK');
 });
   
-// ping.js or inside server.js
-import fetch from "node-fetch";
+
 
 const url = process.env.PING_URL || "https://your-render-app.onrender.com";
 
