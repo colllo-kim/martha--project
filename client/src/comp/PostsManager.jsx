@@ -337,6 +337,7 @@ const clearForm = () => {
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 }
