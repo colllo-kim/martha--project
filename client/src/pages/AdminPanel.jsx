@@ -18,7 +18,7 @@ function AdminPanel() {
 
 
   return (
-    <div className="w-full max-w-[75rem] bg-green-50 dark:bg-slate-900 text-gray-800 dark:text-white">
+    <div className="w-full max-w-[80rem] bg-green-50 dark:bg-slate-900 text-gray-800 dark:text-white">
     <div className="lg:flex">
       {/* Sidebar */}
       <aside className="w-full lg:w-1/5 bg-white dark:bg-slate-800 p-4 shadow-md">

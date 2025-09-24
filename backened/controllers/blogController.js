@@ -63,7 +63,7 @@ const addBlog = async (req, res) => {
   try {
     const { title, author, post_date, excerpt, is_project } = req.body;
     const image = req.file ? req.file.filename : null;
-    let tags = req.body.tags;
+    let {tags} = req.body;
 
     console.log("📥 Raw tags from req.body.tags:", tags);
 
@@ -159,49 +159,50 @@ const getBlogs = async (req, res) => {
 // Update an existing blog post
 const updateBlog = async (req, res) => {
   try {
-    const id = req.params.id;
-    const { title, author, post_date, excerpt, isproject } = req.body; // ✅ Added isproject
+    const {blogId } = req.params;
+    const { title, author, post_date, excerpt, isproject } = req.body;
     const image = req.file ? req.file.filename : null;
-    let tags = req.body.tags;
+    let { tags } = req.body;
 
-    console.log("📥 Raw tags from req.body.tags:", tags);
-
-    // Parse the tags if it's a JSON string
     if (typeof tags === 'string') {
       try {
         tags = JSON.parse(tags);
-        console.log("✅ Parsed tags array:", tags);
-      } catch (parseError) {
-        console.error("❌ Failed to parse tags string:", parseError);
+      } catch {
         tags = [];
       }
     }
-
     if (!Array.isArray(tags)) {
       tags = [tags];
     }
-
-    console.log("🚀 Final tags to update:", tags);
+      if (!post_date) {
+  console.warn("⚠️ post_date not provided, using current date.");
+}
+   const finalDate = post_date || new Date().toISOString().slice(0, 10);
 
     await sql`
       UPDATE blog_posts
       SET title = ${title},
           author = ${author},
-          post_date = ${post_date},
+        post_date = ${finalDate},
           tags = ${tags},
           image = ${image},
           excerpt = ${excerpt},
-          isproject = ${isproject}, -- ✅ Updating isproject
+          is_project = ${isproject},
           updated_at = CURRENT_TIMESTAMP
-      WHERE id = ${id}
+      WHERE id = ${blogId}
     `;
 
-    res.status(200).json({ message: "✅ Blog post updated successfully." });
+    const updated = await sql`
+      SELECT * FROM blog_posts WHERE id = ${blogId}
+    `;
+
+    res.status(200).json(updated[0]);
   } catch (err) {
     console.error("❌ Blog update failed:", err);
     res.status(500).json({ error: "Server error while updating blog post." });
   }
 };
+
 
 
 

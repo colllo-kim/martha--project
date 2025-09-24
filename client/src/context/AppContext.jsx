@@ -133,14 +133,9 @@ const fetchPosts = async () => {
         try {
           setLoading(true);
         
-          const res = await axios.get(`${API_URL}/blogs/analytics`
-            //,{
-      //headers: {
-       // Authorization: `Bearer ${token}`, // 👈 send token here
-    //  },
-   // }
-  );
+          const res = await axios.get(`${API_URL}/blogs/analytics`);
           setAnalyticsData(res.data);
+          console.log(analyticsData)
         } catch (err) {
           console.error("Error fetching analytics data:", err);
           setError("Failed to load analytics data.");

@@ -6,6 +6,7 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { AppContext } from "@/context/AppContext";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const blankPost = {
   title: "",
@@ -35,6 +36,7 @@ function PostsManager() {
   const [editingPost, setEditingPost] = useState(null);
   const [newPost, setNewPost] = useState(blankPost);
   const API_URL = import.meta.env.VITE_API_URL;
+  const { toast } = useToast();
 
   //const clearForm = () => {
  //   setNewPost({ ...blankPost, date: new Date().toISOString().slice(0, 10) });
@@ -45,7 +47,9 @@ function PostsManager() {
   try {
     setLoading(true);
     const token = await getToken();
-    if (!token) throw new Error("No token");
+    if (!token) {
+      throw new Error("No token");
+    }
 
     const post = newPost;
     const formData = new FormData();
@@ -83,10 +87,17 @@ function PostsManager() {
       is_project: false,
       file: null
     });
-
+        toast({
+      title: "Blog added successfully 🎉",
+      description: `Your blog  was added.`,
+    });
   } catch (err) {
     console.error(err);
-    alert("Error saving post");
+     toast({
+      title: "Error saving post ❌",
+      description: err.message || "Something went wrong",
+      variant: "destructive",
+    });
   } finally {
     setLoading(false);
   }
@@ -98,60 +109,65 @@ const clearForm = () => {
   document.getElementById("fileInput").value = ""; // If using a file input
 };
   // Update post
-  const updatePost = async () => {
-    try {
-      setLoading(true);
-      const token = await getToken();
-      if (!token) throw new Error("No token");
+ const updatePost = async () => {
+  try {
+    setLoading(true);
+    const post = editingPost;
+    const formData = new FormData();
 
-      const post = editingPost;
-      const formData = new FormData();
+    formData.append("title", post.title);
+    formData.append("author", post.author);
+    formData.append("post_date", post.date);
+    formData.append("tags", JSON.stringify(post.tags));
+    formData.append("excerpt", post.excerpt);
+    formData.append("content", post.content);
+    formData.append("isproject", post.is_project);
 
-      formData.append("title", post.title);
-      formData.append("author", post.author);
-      formData.append("date", post.date);
-      formData.append("tags", JSON.stringify(post.tags));
-      formData.append("excerpt", post.excerpt);
-      formData.append("content", post.content);
-      formData.append("is_project", post.is_project);
-      if (post.file) {
-        formData.append("image", post.file);
-      }
-
-      const res = await axios.patch(`${API_URL}/${post.id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      const updatedPost = res.data;
-      setPosts(posts.map((p) => (p.id === updatedPost.id ? updatedPost : p)));
-      setEditingPost(null);
-    } catch (err) {
-      console.error(err);
-      alert("Error updating post");
-    } finally {
-      setLoading(false);
+    if (post.file) {
+      formData.append("image", post.file);
     }
-  };
+
+    const blogId = post.id;
+    const res = await axios.patch(`${API_URL}/blogs/${blogId}`, formData);
+
+    const updatedPost = res.data;
+    setPosts(posts.map((p) => (p.id === updatedPost.id ? updatedPost : p)));
+
+    toast({
+      title: "✅ Blog updated successfully!",
+      description: `Your blog "${updatedPost.title}" was updated.`,
+    });
+
+    setEditingPost(null);
+  } catch (err) {
+    console.error(err);
+    toast({
+      title: "❌ Error updating blog",
+      description: `Something went wrong while updating.`,
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // Delete post
   const deletePost = async (blogId) => {
     try {
-      const token = await getToken();
-      if (!token) throw new Error("No token");
+     
+      await axios.delete(`${API_URL}/blogs/${blogId}`);
 
-      await axios.delete(`${API_URL}blogs/${blogId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setPosts(posts.filter((p) => p.id !== blogId));
+      
+         toast({
+      title: "Blog deleted successfully 🎉",
+      description: `Your blog  was added.`,
+    });
     } catch (err) {
-      console.error(err);
-      alert("Error deleting post");
+      
+         toast({
+      title: "Failed to delete the blog 🎉",
+      description: `error deleting.`,
+    });
     }
   };
 

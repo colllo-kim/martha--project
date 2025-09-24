@@ -11,7 +11,7 @@ router.get('/stats',  getStatistics);
 router.get("/analytics", getAnalyticsData);
 router.get('/id/:blogId', getBlog);
 router.get('/blog-items', getBlogs);
-router.patch('/:blogId', updateBlog);
+router.patch('/:blogId',upload.single('image'), updateBlog);
 router.delete('/:blogId', deleteBlog);
 
 export default router;
